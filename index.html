@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VCET Open Source</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="bg-animation"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>VCET Open Source</h1>
+        <p>Join the revolution of open source innovation</p>
+        <div class="btn-group">
+          <button class="btn btn-primary">
+            <i class="fab fa-github"></i> Start Contributing
+          </button>
+          <button class="btn btn-primary">
+            <i class="fas fa-book"></i> Learn More
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="stats-container">
+        <div class="stat-item">
+          <h3 id="projectCount">0</h3>
+          <p>Active Projects</p>
+        </div>
+        <div class="stat-item">
+          <h3 id="contributorCount">0</h3>
+          <p>Contributors</p>
+        </div>
+        <div class="stat-item">
+          <h3 id="starCount">0</h3>
+          <p>GitHub Stars</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Projects will be added dynamically -->
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <h2>Ready to Make an Impact?</h2>
+      <p>
+        Join our community and help shape the future of open source development
+      </p>
+      <button class="btn btn-primary">Get Started Now</button>
+    </section>
+
+    <script>
+      // Sample project data
+      const projects = [
+        {
+          name: "Project Atlas",
+          description:
+            "A collaborative mapping tool for educational institutions with real-time updates and custom annotation support.",
+          stars: 128,
+          forks: 45,
+          contributors: 12,
+          language: "TypeScript",
+          tags: ["mapping", "education", "real-time"],
+        },
+        {
+          name: "DataViz Library",
+          description:
+            "Comprehensive data visualization components built with D3.js for academic research presentations.",
+          stars: 89,
+          forks: 23,
+          contributors: 8,
+          language: "JavaScript",
+          tags: ["visualization", "research", "charts"],
+        },
+        {
+          name: "StudyFlow",
+          description:
+            "Open-source learning management system designed specifically for engineering courses.",
+          stars: 156,
+          forks: 67,
+          contributors: 15,
+          language: "Python",
+          tags: ["education", "LMS", "engineering"],
+        },
+      ];
+
+      // Animate counting up
+      function animateCount(element, target, duration = 2000) {
+        let start = 0;
+        const increment = target / (duration / 16);
+        const timer = setInterval(() => {
+          start += increment;
+          if (start >= target) {
+            clearInterval(timer);
+            start = target;
+          }
+          element.textContent = Math.floor(start);
+        }, 16);
+      }
+
+      // Initialize animations and content
+      document.addEventListener("DOMContentLoaded", () => {
+        // Animate stats
+        animateCount(document.getElementById("projectCount"), 15);
+        animateCount(document.getElementById("contributorCount"), 100);
+        animateCount(document.getElementById("starCount"), 1000);
+
+        // Render projects
+        const projectsGrid = document.getElementById("projectsGrid");
+        projects.forEach((project) => {
+          const projectCard = `
+                    <div class="project-card">
+                        <h3 class="project-title">${project.name}</h3>
+                        <p class="project-description">${
+                          project.description
+                        }</p>
+                        <div class="project-tags">
+                            ${project.tags
+                              .map((tag) => `<span class="tag">${tag}</span>`)
+                              .join("")}
+                        </div>
+                        <div class="project-stats">
+                            <span class="project-stat">
+                                <i class="fas fa-star"></i> ${project.stars}
+                            </span>
+                            <span class="project-stat">
+                                <i class="fas fa-code-branch"></i> ${
+                                  project.forks
+                                }
+                            </span>
+                            <span class="project-stat">
+                                <i class="fas fa-users"></i> ${
+                                  project.contributors
+                                }
+                            </span>
+                        </div>
+                    </div>
+                `;
+          projectsGrid.innerHTML += projectCard;
+        });
+      });
+    </script>
+  </body>
+</html>
